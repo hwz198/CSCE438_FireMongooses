@@ -1,23 +1,24 @@
 import socket, select, string, sys, random
 
+#Constants
 title = "Correct or approve these few sentences!" 
-hittype= "text"
+type = "text"
 payamount = .01
 numhits = 10 
-	
+
 	
 #main function
 if __name__ == "__main__":
 	while True: 
-		print '=====Fire Mongooses Amazon Turk Application===='
+		print '============Fire Mongooses Amazon Turk Application============'
+		print 'Please enter the number of the action you would like to take:'
 		print '(1) Create a HIT'
 		print '(2) Recieve Results'
 		print '(3) Approve all HITs'
 		print '(4) Reject all HITs'
+		maininput = int(sys.stdin.readline())
 		
-		maininput = sys.stdin.readline()
-		
-		if 1 is in maininput:
+		if maininput == 1:
 			print 'HIT created.' 
 		elif maininput == 2:
 			print 'Results recieved.'
