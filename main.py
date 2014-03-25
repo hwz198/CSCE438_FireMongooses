@@ -1,7 +1,7 @@
 import socket, select, string, sys, random
 
 title = "Correct or approve these few sentences!" 
-type = "text"
+hittype= "text"
 payamount = .01
 numhits = 10 
 	
