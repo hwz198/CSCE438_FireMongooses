@@ -5,6 +5,7 @@ CSCE 438 Caverlee Fire Mongoose Team
 
 
 Steps to do: 
+
 •	1. Connect from the users computer to Amazon Mechanical Turk
 
 •	2. Retreive the Requester's text to be edited by the user.
