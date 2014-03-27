@@ -19,6 +19,12 @@ ExampleTwo = 'At the music recital, Alexandra enjoyed listening to her friend Mo
 # Third example string  || Should read, 'All states impose severe penalties on drivers who do not stop when they are involved in accidents.' (SAT Prep Hard)
 ExampleThree = 'All states impose severe penalties on drivers who do not stop when he or she is involved in accidents.'
 
+#Fourth example string || 
+ExampleFour = 'YO MAMMA'
+
+#Fifth example string || 
+ExampleFive = 'YOUR MUTTA'
+
 #print 'Please enter your Amazon Account username'
 #username = int(sys.stdin.readline())
 #print 'Please enter your Password'
@@ -27,8 +33,8 @@ ExampleThree = 'All states impose severe penalties on drivers who do not stop wh
 
 #main function
 if __name__ == "__main__":
-	ACCESS_ID = ''
-	SECRET_KEY = ''
+	ACCESS_ID = 'AKIAIC6NJRXA5KHGVFXA'
+	SECRET_KEY = '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'
 	HOST = 'mechanicalturk.sandbox.amazonaws.com'
 	mtc = MTurkConnection(aws_access_key_id=ACCESS_ID, aws_secret_access_key=SECRET_KEY, host=HOST)
 	while True: 
@@ -58,16 +64,16 @@ if __name__ == "__main__":
 				SentenceMenuInput = int(sys.stdin.readline())
 				if SentenceMenuInput == 1:
 					print 'Example One chosen'
-					overview-=Overview()
+					overview=Overview()
 					overview.append_field('Title', 'Correct or Approve the grammar')
 					question1 = QuestionContent()
-					question1.appendfield('Title', ExampleOne)
+					question1.append_field('Title', ExampleOne)
 					answerfield1 = FreeTextAnswer()
 					fullquestion1 = Question(identifier="answer", content=question1, answer_spec=AnswerSpecification(answerfield1))
 					questionform1=QuestionForm()
 					questionform1.append(overview)
 					questionform1.append(fullquestion1)
-					mtc.create_hit(questions=questionform1,max_assignments=1, title=Hit_title, description='Correct or approve this excerpt',duration = 300, reward=0.01)
+					mtc.create_hit(questions=questionform1,max_assignments=1,title=Hit_title,description='Correct or approve this excerpt',keywords='Grammar, Correct',duration = 300, reward=0.01)
 				elif SentenceMenuInput == 2:
 					print 'Example Two chosen'
 				elif SentenceMenuInput == 3:
