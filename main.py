@@ -83,12 +83,12 @@ if __name__ == "__main__":
 				elif SentenceMenuInput == 5:
 					print 'Example Five chosen'
 				else: 
-					print '============Create a HIT============'
-					print 'Please enter the sentence(s) you would like to use for the HIT:'
-					InputSentence = sys.stdin.readline()
-					print 'Your input was:'+InputSentence+'\n'
+					print 'Invalid Input, returning to main menu.'
 			elif CreateInput == 2:
-				print 'recieve input'
+				print '============Create a HIT============'
+				print 'Please enter the sentence(s) you would like to use for the HIT:'
+				InputSentence = sys.stdin.readline()
+				print 'Your input was: '+InputSentence+'\n'
 			else:
 				print 'Invalid Input, returning to main menu.'
 		elif MainInput == 2:
