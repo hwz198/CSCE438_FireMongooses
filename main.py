@@ -1,8 +1,9 @@
 import socket, select, string, sys, random
 from boto.mturk.connection import MTurkConnection
+from boto.mturk.question import QuestionContent,Question,QuestionForm,Overview,AnswerSpecification,SelectionAnswer,FormattedContent,FreeTextAnswer
 
 #Constants
-title = "Correct or approve these few sentences!" 
+Hit_title = "Correct or approve these few sentences!" 
 HitType = "text"
 PayAmount = .01
 NumHits = 10 
@@ -26,8 +27,8 @@ ExampleThree = 'All states impose severe penalties on drivers who do not stop wh
 
 #main function
 if __name__ == "__main__":
-	ACCESS_ID = 'your inforino here, no copy pasterino'
-	SECRET_KEY = 'your infomacíon aqui'
+	ACCESS_ID = ''
+	SECRET_KEY = ''
 	HOST = 'mechanicalturk.sandbox.amazonaws.com'
 	mtc = MTurkConnection(aws_access_key_id=ACCESS_ID, aws_secret_access_key=SECRET_KEY, host=HOST)
 	while True: 
@@ -57,6 +58,16 @@ if __name__ == "__main__":
 				SentenceMenuInput = int(sys.stdin.readline())
 				if SentenceMenuInput == 1:
 					print 'Example One chosen'
+					overview-=Overview()
+					overview.append_field('Title', 'Correct or Approve the grammar')
+					question1 = QuestionContent()
+					question1.appendfield('Title', ExampleOne)
+					answerfield1 = FreeTextAnswer()
+					fullquestion1 = Question(identifier="answer", content=question1, answer_spec=AnswerSpecification(answerfield1))
+					questionform1=QuestionForm()
+					questionform1.append(overview)
+					questionform1.append(fullquestion1)
+					mtc.create_hit(questions=questionform1,max_assignments=1, title=Hit_title, description='Correct or approve this excerpt',duration = 300, reward=0.01)
 				elif SentenceMenuInput == 2:
 					print 'Example Two chosen'
 				elif SentenceMenuInput == 3:
