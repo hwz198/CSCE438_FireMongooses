@@ -6,7 +6,12 @@ type = "text"
 payamount = .01
 numhits = 10 
 
-	
+#print 'Please enter your Amazon Account username'
+#username = int(sys.stdin.readline())
+#print 'Please enter your Password'
+#password = int(sys.stdin.readline())
+
+
 #main function
 if __name__ == "__main__":
 	while True: 
