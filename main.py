@@ -37,7 +37,15 @@ if __name__ == "__main__":
 		print '(2) Recieve Results'
 		print '(3) Approve all HITs'
 		print '(4) Reject all HITs'
-		CreateInput =  int(sys.stdin.readline())
+		print '(5) Exit'
+		MainInput = int(sys.stdin.readline())
+
+		if MainInput == 1:
+			print '============Create a HIT============'
+			print 'What would you like do?'
+			print '(1) Choose an example string to use'
+			print '(2) Write my own string'
+			CreateInput =  int(sys.stdin.readline())
 			if CreateInput == 1:
 				print '============Create a HIT============'
 				print 'Please choose one of the following strings:'
