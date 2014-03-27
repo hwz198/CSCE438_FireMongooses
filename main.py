@@ -29,9 +29,7 @@ if __name__ == "__main__":
 	ACCESS_ID = 'your inforino here, no copy pasterino'
 	SECRET_KEY = 'your infomacíon aqui'
 	HOST = 'mechanicalturk.sandbox.amazonaws.com'
-	mtc = MTurkConnection(aws_access_key_id=ACCESS_ID,
-                      aws_secret_access_key=SECRET_KEY,
-                      host=HOST)
+	mtc = MTurkConnection(aws_access_key_id=ACCESS_ID, aws_secret_access_key=SECRET_KEY, host=HOST)
 	while True: 
 		print '============Fire Mongooses Amazon Turk Application============'
 		print 'Please enter the number of the action you would like to take:'
