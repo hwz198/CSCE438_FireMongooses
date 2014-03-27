@@ -1,4 +1,5 @@
 import socket, select, string, sys, random
+from boto.mturk.connection import MTurkConnection
 
 #Constants
 title = "Correct or approve these few sentences!" 
