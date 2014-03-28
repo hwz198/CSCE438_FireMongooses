@@ -30,20 +30,38 @@ ExampleFive = 'YOUR MUTTA'
 #print 'Please enter your Password'
 #password = int(sys.stdin.readline())
 
+def show_results(mtc):
+	num_hits = 50
+	hits = mtc.get_reviewable_hits(page_size = num_hits)
+	print "Total results to fetch %s " % hits.TotalNumResults
+	print "Request hits page %i" % 1
+	total_pages = float(hits.TotalNumResults)/num_hits
+	total_num = int(total_pages)
+	if(total_pages - total_num > 0):
+		total_pages = total_num+1
+	else:
+		total_pages = total_num
+	page_num = 1
+	while page_num < total_pages:
+		page_num = page_num + 1
+		print "Request hits page %i " % page_num
+		temp_hits = mtc.get_reviewable_hits(page_size = num_hits, page_number = page_num)
+		hits.extend(temp_hits)
+	return hits
 
 #main function
 if __name__ == "__main__":
-	ACCESS_ID = 'AKIAIC6NJRXA5KHGVFXA'
-	SECRET_KEY = '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'
+	ACCESS_ID = ''
+	SECRET_KEY = ''
 	HOST = 'mechanicalturk.sandbox.amazonaws.com'
 	mtc = MTurkConnection(aws_access_key_id=ACCESS_ID, aws_secret_access_key=SECRET_KEY, host=HOST)
 	while True: 
 		print '============Fire Mongooses Amazon Turk Application============'
 		print 'Please enter the number of the action you would like to take:'
 		print '(1) Create a HIT'
-		print '(2) Recieve Results'
-		print '(3) Approve all HITs'
-		print '(4) Reject all HITs'
+		print '(2) Show Results'
+		print '(3) Approve HITs'
+		print '(4) Reject HITs'
 		print '(5) Exit'
 		MainInput = int(sys.stdin.readline())
 
@@ -66,36 +84,157 @@ if __name__ == "__main__":
 					print 'Example One chosen'
 					overview=Overview()
 					overview.append_field('Title', 'Correct or Approve the grammar')
-					question1 = QuestionContent()
-					question1.append_field('Title', ExampleOne)
-					answerfield1 = FreeTextAnswer()
-					fullquestion1 = Question(identifier="answer", content=question1, answer_spec=AnswerSpecification(answerfield1))
-					questionform1=QuestionForm()
-					questionform1.append(overview)
-					questionform1.append(fullquestion1)
-					mtc.create_hit(questions=questionform1,max_assignments=1,title=Hit_title,description='Correct or approve this excerpt',keywords='Grammar, Correct',duration = 300, reward=0.01)
+					question = QuestionContent()
+					question.append_field('Title', ExampleOne)
+					answerfield = FreeTextAnswer()
+					fullquestion = Question(identifier="answer", content=question, answer_spec=AnswerSpecification(answerfield))
+					questionform=QuestionForm()
+					questionform.append(overview)
+					questionform.append(fullquestion)
+					mtc.create_hit(questions=questionform,max_assignments=1,title=Hit_title,description='Correct or approve this excerpt',keywords='Grammar, Correct',duration = 300, reward=0.01)
+					
 				elif SentenceMenuInput == 2:
 					print 'Example Two chosen'
+					overview=Overview()
+					overview.append_field('Title', 'Correct or Approve the grammar')
+					question = QuestionContent()
+					question.append_field('Title', ExampleTwo)
+					answerfield = FreeTextAnswer()
+					fullquestion = Question(identifier="answer", content=question, answer_spec=AnswerSpecification(answerfield))
+					questionform=QuestionForm()
+					questionform.append(overview)
+					questionform.append(fullquestion)
+					mtc.create_hit(questions=questionform,max_assignments=1,title=Hit_title,description='Correct or approve this excerpt',keywords='Grammar, Correct',duration = 300, reward=0.01)
 				elif SentenceMenuInput == 3:
 					print 'Example Three chosen'
+					overview=Overview()
+					overview.append_field('Title', 'Correct or Approve the grammar')
+					question = QuestionContent()
+					question.append_field('Title', ExampleThree)
+					answerfield = FreeTextAnswer()
+					fullquestion = Question(identifier="answer", content=question, answer_spec=AnswerSpecification(answerfield))
+					questionform=QuestionForm()
+					questionform.append(overview)
+					questionform.append(fullquestion)
+					mtc.create_hit(questions=questionform,max_assignments=1,title=Hit_title,description='Correct or approve this excerpt',keywords='Grammar, Correct',duration = 300, reward=0.01)
 				elif SentenceMenuInput == 4: 
 					print 'Example Four chosen'
+					overview=Overview()
+					overview.append_field('Title', 'Correct or Approve the grammar')
+					question = QuestionContent()
+					question.append_field('Title', ExampleFour)
+					answerfield = FreeTextAnswer()
+					fullquestion = Question(identifier="answer", content=question, answer_spec=AnswerSpecification(answerfield))
+					questionform=QuestionForm()
+					questionform.append(overview)
+					questionform.append(fullquestion)
+					mtc.create_hit(questions=questionform,max_assignments=1,title=Hit_title,description='Correct or approve this excerpt',keywords='Grammar, Correct',duration = 300, reward=0.01)
 				elif SentenceMenuInput == 5:
 					print 'Example Five chosen'
-				else: 
-					print '============Create a HIT============'
-					print 'Please enter the sentence(s) you would like to use for the HIT:'
-					InputSentence = sys.stdin.readline()
-					print 'Your input was:'+InputSentence+'\n'
+					overview=Overview()
+					overview.append_field('Title', 'Correct or Approve the grammar')
+					question = QuestionContent()
+					question.append_field('Title', ExampleFive)
+					answerfield = FreeTextAnswer()
+					fullquestion = Question(identifier="answer", content=question, answer_spec=AnswerSpecification(answerfield))
+					questionform=QuestionForm()
+					questionform.append(overview)
+					questionform.append(fullquestion)
+					mtc.create_hit(questions=questionform,max_assignments=1,title=Hit_title,description='Correct or approve this excerpt',keywords='Grammar, Correct',duration = 300, reward=0.01)
+				else:
+					print 'Invalid Input, returning to main menu.'
+
+
 			elif CreateInput == 2:
-				print 'recieve input'
+				print '============Create a HIT============'
+				print 'Please enter the sentence(s) you would like to use for the HIT:'
+				InputSentence = sys.stdin.readline()
+				print 'Your input was:'+InputSentence+'\n'
+				overview=Overview()
+				overview.append_field('Title', 'Correct or Approve the grammar')
+				question = QuestionContent()
+				question.append_field('Title', InputSentence)
+				answerfield = FreeTextAnswer()
+				fullquestion = Question(identifier="answer", content=question, answer_spec=AnswerSpecification(answerfield))
+				questionform=QuestionForm()
+				questionform.append(overview)
+				questionform.append(fullquestion)
+				mtc.create_hit(questions=questionform,max_assignments=1,title=Hit_title,description='Correct or approve this excerpt',keywords='Grammar, Correct',duration = 300, reward=0.01)
 			else:
 				print 'Invalid Input, returning to main menu.'
 		elif MainInput == 2:
+			print '============Show Results============'
 			print 'Results recieved.'
+			hits = show_results(mtc)
+			for hit in hits:
+				assignment = mtc.get_assignments(hit.HITId)
+				for assign in assignment:
+					print "Answers of the worker number %s " % assign.WorkerId
+					#print "HITId is %s " % assign.HITId #Removed due to better efficiency of using Assignment ID for the same purposes
+					print "Assign ID is %s " % assign.AssignmentId
+					for question_form_answer in assign.answers[0]:
+						print question_form_answer.fields
+						print "-------------------"
+			
+			
 		elif MainInput == 3:
-			print 'all pending HIT sumbissions have been approved.'
+			print '============Approve Workers============'
+			print 'What would you like do?'
+			print '(1) Approve worker by HITId'
+			print '(2) Approve all submissions'
+			choice = int(sys.stdin.readline())
+
+			if choice == 1:
+				print 'Input Assignment ID of the HIT you want to approve' 
+				inputassign = sys.stdin.readline()
+				mtc.approve_assignment(inputassign)
+				for hit in hits:
+					assignment = mtc.get_assignments(hit.HITId)
+					for assign in assignment:
+						if inputassign == assign.AssignmentId:
+							mtc.disable_hit(hit.HITId)
+			elif choice == 2:
+				hits = show_results(mtc)
+				#for temp in hits:
+				#	mtc.disable_hit(temp.HITId)
+				for hit in hits:
+					assignment = mtc.get_assignments(hit.HITId)
+					for assign in assignment:
+						mtc.approve_assignment(assign.AssignmentId)
+					mtc.disable_hit(hit.HITId)
+			#print 'Top HIT sumbission has been approved.'
+			#mtc.disable_hit(temp.HITId)
+			else:
+				print 'Invalid input, returning to menu'
 		elif MainInput == 4:
+			print '============Reject Workers============'
+			print 'What would you like do?'
+			print '(1) Reject worker by HITId'
+			print '(2) Reject all submissions'
+			choice = int(sys.stdin.readline())
+
+			if choice == 1:
+				hits = show_results(mtc)
+				print 'Input Assignment ID of the HIT you want to reject' 
+				inputassign = sys.stdin.readline()
+				mtc.reject_assignment(inputassign)
+				for hit in hits:
+					assignment = mtc.get_assignments(hit.HITId)
+					for assign in assignment:
+						if inputassign == assign.AssignmentId:
+							print 'Found it'
+							mtc.disable_hit(hit.HITId)
+			elif choice == 2:
+				hits = show_results(mtc)
+				#for temp in hits:
+				#	mtc.disable_hit(temp.HITId)
+				for hit in hits:
+					assignment = mtc.get_assignments(hit.HITId)
+					for assign in assignment:
+						mtc.reject_assignment(assign.AssignmentId)
+					mtc.disable_hit(hit.HITId)
+			#print 'Top HIT sumbission has been approved.'
+			#mtc.disable_hit(temp.HITId)
 			print 'all pending HIT sumbissions have been rejected.'
 		elif MainInput == 5:
 			print 'Exiting....'
