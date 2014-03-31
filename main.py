@@ -51,8 +51,8 @@ def show_results(mtc):
 
 #main function
 if __name__ == "__main__":
-	ACCESS_ID = ''
-	SECRET_KEY = ''
+	ACCESS_ID = 'Your info here'
+	SECRET_KEY = 'Your info here'
 	HOST = 'mechanicalturk.sandbox.amazonaws.com'
 	mtc = MTurkConnection(aws_access_key_id=ACCESS_ID, aws_secret_access_key=SECRET_KEY, host=HOST)
 	while True: 
@@ -238,6 +238,11 @@ if __name__ == "__main__":
 			print 'all pending HIT sumbissions have been rejected.'
 		elif MainInput == 5:
 			print 'Exiting....'
+			hits = show_results(mtc)
+			#for temp in hits:
+			#	mtc.disable_hit(temp.HITId)
+			for hit in hits:
+				mtc.disable_hit(hit.HITId)
 			break
 		else: 
 			print 'Invalid input' 
